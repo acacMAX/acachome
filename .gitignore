@@ -1,0 +1,32 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 依赖
+node_modules/
+package-lock.json
+yarn.lock
+
+# 日志
+*.log
+npm-debug.log*
+
+# 临时文件
+.tmp/
+temp/
+
+# Cloudflare
+.wrangler/
+worker-configuration.d.ts
+
+# 环境变量
+.env
+.env.local
+.env.*.local

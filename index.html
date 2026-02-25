@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="acac的个人主页 - 像素艺术家/开发者">
+    <meta name="keywords" content="acac, 个人主页, 像素艺术, 开发者, 前端">
+    <meta name="author" content="acac">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="acac - 个人主页">
+    <meta property="og:description" content="像素艺术家/开发者">
+    <meta property="og:image" content="b_c3713eece141586c73c0a70a24e1f831.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="acac - 个人主页">
+    <meta property="twitter:description" content="像素艺术家/开发者">
+    <meta property="twitter:image" content="b_c3713eece141586c73c0a70a24e1f831.jpg">
+
+    <!-- 性能优化 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="b_c3713eece141586c73c0a70a24e1f831.jpg">
+    <link rel="apple-touch-icon" href="b_c3713eece141586c73c0a70a24e1f831.jpg">
+
+    <title>个人主页</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pixel-grid-bg"></div>
+    <div class="radial-glow"></div>
+    <div class="pixel-particles-container" id="particlesContainer"></div>
+    <div class="twinkling-pixels" id="twinklingContainer"></div>
+    <div class="scanlines"></div>
+    <div class="matrix-container" id="matrixContainer"></div>
+    
+    <div class="container">
+        <div class="card">
+            <div class="avatar-wrapper">
+                <div class="avatar-glow"></div>
+                <img src="b_c3713eece141586c73c0a70a24e1f831.jpg" alt="头像" class="avatar">
+                <div class="avatar-particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
+            </div>
+            
+            <h1 class="name">Hello, I'm <span class="name-accent">acac</span></h1>
+            <p class="title">开发者</p>
+            
+            <div class="pixel-clock">
+                <div class="clock-display" id="clockDisplay">
+                    <span class="clock-label" data-label="H">00</span>
+                    <span class="clock-separator">:</span>
+                    <span class="clock-label" data-label="M">00</span>
+                    <span class="clock-separator">:</span>
+                    <span class="clock-label" data-label="S">00</span>
+                </div>
+                <div class="clock-date" id="clockDate"></div>
+            </div>
+            
+            <div class="project-links">
+                <a href="https://actv.qzz.io" class="project-link pixel-button">
+                    <div class="project-icon">🎮</div>
+                    <div class="project-info">
+                        <span class="project-name">ACTV</span>
+                        <span class="project-url">actv.qzz.io</span>
+                    </div>
+                    <div class="pixel-arrow">▶</div>
+                </a>
+                <a href="https://api.acz.qzz.io" class="project-link pixel-button">
+                    <div class="project-icon">⚡</div>
+                    <div class="project-info">
+                        <span class="project-name">API</span>
+                        <span class="project-url">api.acz.qzz.io</span>
+                    </div>
+                    <div class="pixel-arrow">▶</div>
+                </a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://x.com/acacCHN" class="social-link pixel-button" target="_blank">
+                    <div class="social-icon">𝕏</div>
+                    <span class="social-name">X</span>
+                </a>
+                <a href="https://github.com/acacMAX" class="social-link pixel-button" target="_blank">
+                    <div class="social-icon">🐙</div>
+                    <span class="social-name">GitHub</span>
+                </a>
+                <a href="https://space.bilibili.com/1016164445?spm_id_from=333.1007.0.0" class="social-link pixel-button" target="_blank">
+                    <div class="social-icon">📺</div>
+                    <span class="social-name">B站</span>
+                </a>
+            </div>
+            
+            <div class="pixel-decoration">
+                <span class="pixel-block"></span>
+                <span class="pixel-block"></span>
+                <span class="pixel-block"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# Cloudflare Pages 部署配置
+# 注意：此项目应该部署到 Cloudflare Pages 而不是 Workers
+# Cloudflare Pages 是专门用于托管静态网站的服务
+
+name = "acac-personal-homepage"
+type = "webpack"
+account_id = "" # 请替换为你的 Cloudflare Account ID
+
+# 构建配置（如果需要构建步骤）
+# [build]
+# command = "npm run build"
+# cwd = "."
+
+# 环境变量
+# [vars]
+# ENVIRONMENT = "production"
+
+# 重定向规则（如果需要）
+# [[redirects]]
+# from = "/old-path"
+# to = "/new-path"
+# status = 301
+
+# 自定义域名（部署后可配置）
+# routes = [
+#   { pattern = "yourdomain.com", custom_domain = true }
+# ]
+
+# 页面规则
+[build]
+# 由于是纯静态网站，无需构建步骤
+# 只需要将所有文件上传即可
