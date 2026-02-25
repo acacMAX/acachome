@@ -1,120 +1,129 @@
 # 部署指南
 
-## Cloudflare Pages 部署
+## Cloudflare Workers Sites 部署
 
-这是一个纯静态网站项目，推荐使用 **Cloudflare Pages** 进行部署，而不是 Cloudflare Workers。
-
-### 方法一：通过 Cloudflare Dashboard 部署（推荐）
-
-1. **登录 Cloudflare**
-   - 访问 https://dash.cloudflare.com/
-   - 登录你的账户
-
-2. **创建 Pages 项目**
-   - 点击左侧菜单的 **Workers & Pages**
-   - 点击 **Create application**
-   - 选择 **Pages** 标签
-   - 点击 **Create a project**
-
-3. **上传文件**
-   - 选择 **Upload assets**
-   - 点击 **Browse** 选择项目文件夹（D:\cxs\acaczy）
-   - 确保包含以下文件：
-     - `index.html`
-     - `style.css`
-     - `script.js`
-     - `b_c3713eece141586c73c0a70a24e1f831.jpg`（头像图片）
-
-4. **部署**
-   - 点击 **Deploy site**
-   - 等待部署完成（通常几秒钟）
-   - 获得部署URL（例如：https://your-project.pages.dev）
-
-5. **配置自定义域名**（可选）
-   - 在项目设置中点击 **Custom domains**
-   - 点击 **Set up a custom domain**
-   - 输入你的域名并按照指引配置DNS
+这是一个纯静态网站项目，使用 **Cloudflare Workers Sites** 进行部署。
 
 ---
 
-### 方法二：通过 Wrangler CLI 部署
+## 方法一：通过 Wrangler CLI 部署（推荐）
 
-1. **安装 Wrangler CLI**
-   ```bash
-   npm install -g wrangler
-   ```
+### 1. 安装 Wrangler CLI
 
-2. **登录 Cloudflare**
-   ```bash
-   wrangler login
-   ```
+```bash
+npm install -g wrangler
+```
 
-3. **初始化 Pages 项目**
-   在项目目录下创建 `_headers` 文件用于性能优化：
+### 2. 登录 Cloudflare
 
-   ```http
-   /*
-     X-Content-Type-Options: nosniff
-     X-Frame-Options: DENY
-     X-XSS-Protection: 1; mode=block
-     Referrer-Policy: strict-origin-when-cross-origin
-     Permissions-Policy: geolocation=(), microphone=(), camera=()
+```bash
+wrangler login
+```
 
-     # 缓存策略
-     Cache-Control: public, max-age=31536000, immutable
+这会打开浏览器让你授权 Cloudflare。
 
-   index.html
-     Cache-Control: public, max-age=0, must-revalidate
+### 3. 部署项目
 
-   /*.jpg
-     Cache-Control: public, max-age=31536000, immutable
+在项目目录（D:\cxs\acaczy）下运行：
 
-   /*.css
-     Cache-Control: public, max-age=31536000, immutable
+```bash
+npm run deploy
+# 或
+wrangler deploy
+```
 
-   /*.js
-     Cache-Control: public, max-age=31536000, immutable
-   ```
+首次部署时，Wrangler 会询问：
+- 项目名称：保持默认 `acac-personal-homepage`
+- 子域名：输入你想要的子域名（如 `acac-home`）
 
-4. **创建 `_redirects` 文件**（可选，用于重定向）
-   ```http
-   /* /index.html 200
-   ```
+### 4. 部署完成
 
-5. **部署**
-   ```bash
-   cd D:\cxs\acaczy
-   wrangler pages deploy .
-   ```
-
-6. **首次部署需要配置**
-   - Wrangler 会询问项目名称
-   - 输入：`acac-personal-homepage`
-   - 选择创建新项目
+部署成功后，你会获得一个 Workers URL，例如：
+```
+https://acac-personal-homepage.your-subdomain.workers.dev
+```
 
 ---
 
-### 方法三：通过 Git 仓库部署（自动部署）
+## 方法二：通过 Cloudflare Dashboard 部署
 
-1. **推送代码到 Git 仓库**
+### 1. 创建 Worker
+
+1. 访问 https://dash.cloudflare.com/
+2. 点击左侧菜单的 **Workers & Pages**
+3. 点击 **Create application**
+4. 选择 **Create Worker**
+5. 给 Worker 命名（如：`acac-personal-homepage`）
+6. 点击 **Deploy**
+
+### 2. 上传 Workers Sites
+
+1. 进入 Worker 设置
+2. 点击 **Settings** > **Workers Sites**
+3. 点击 **Create assets**
+4. 或使用 Wrangler CLI：
    ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/your-username/your-repo.git
-   git push -u origin main
+   wrangler deploy
    ```
 
-2. **在 Cloudflare Pages 连接仓库**
-   - 创建 Pages 项目时选择 **Connect to Git**
-   - 选择你的 Git 提供商（GitHub/GitLab/Bitbucket）
-   - 授权并选择仓库
-   - 配置构建设置（留空即可，因为无需构建）
+---
 
-3. **配置自动部署**
-   - 每次推送到主分支会自动触发部署
-   - 可在预览 URL 查看部署效果
+## 配置自定义域名
+
+### 1. 在 Cloudflare Dashboard 配置
+
+1. 进入你的 Worker 设置
+2. 点击 **Settings** > **Triggers**
+3. 在 **Custom Domains** 部分点击 **Add custom domain**
+4. 输入你的域名（如：`home.acac.com`）
+5. 按照指引配置 DNS 记录
+
+### 2. 或在 wrangler.toml 中配置
+
+编辑 `wrangler.toml` 文件：
+
+```toml
+routes = ["acachome.yourdomain.com/*"]
+```
+
+然后重新部署：
+```bash
+wrangler deploy
+```
+
+---
+
+## 本地开发
+
+### 启动本地开发服务器
+
+```bash
+npm run dev
+# 或
+wrangler dev
+```
+
+访问 `http://localhost:8787` 查看效果。
+
+---
+
+## Git 集成（自动部署）
+
+### 1. 推送代码到 GitHub
+
+```bash
+git add .
+git commit -m "Update site"
+git push
+```
+
+### 2. 连接 GitHub 到 Cloudflare
+
+1. 在 Cloudflare Dashboard 创建 Worker
+2. 选择 **Connect to Git**
+3. 授权 GitHub 并选择仓库
+4. 配置构建命令（留空，因为是静态文件）
+5. 每次推送代码会自动部署
 
 ---
 
