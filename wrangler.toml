@@ -2,9 +2,10 @@ name = "acac-personal-homepage"
 main = "worker.js"
 compatibility_date = "2024-01-01"
 
-# Workers Sites 配置 - 使用已弃用的 workers-site 模式
-[site]
-bucket = "./"
+# 静态资源绑定
+[assets]
+directory = "./"
+binding = "ASSETS"
 
 # 部署配置
 [vars]
